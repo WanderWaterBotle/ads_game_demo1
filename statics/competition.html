@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>广告争霸赛 · 比赛中</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #0b3c91; color: #fff; font-family: Arial; padding: 20px; }
+    .leaderboard { background: #1e3c72; padding: 15px; border-radius: 10px; margin-top: 20px; max-height: 250px; overflow-y: auto; }
+    .entry { display: flex; justify-content: space-between; padding: 5px 0; border-bottom: 1px solid #345; }
+    .highlight { color: yellow; font-weight: bold; }
+    .actions, .search-bar { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
+    button { padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; }
+    .btn-watch { background: orange; color: #fff; }
+    .btn-invite { background: green; color: #fff; }
+    .btn-exit { background: red; color: #fff; }
+    input[type="text"] { padding: 8px; border-radius: 15px; border: none; width: 150px; }
+    .status-bar { text-align: center; margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h1>广告争霸赛 · 比赛中</h1>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="输入玩家名">
+    <button onclick="searchPlayer()">搜索</button>
+  </div>
+
+  <div class="leaderboard" id="leaderboard">
+    <h3>排行榜</h3>
+  </div>
+
+  <div class="actions">
+    <button class="btn-watch" onclick="watchAd()">观看广告</button>
+    <button class="btn-invite" onclick="inviteFriend()">邀请好友</button>
+    <button class="btn-exit" onclick="exitGame()">离开比赛</button>
+  </div>
+
+  <div class="status-bar" id="statusBar">
+    奖池：¥0.00 | 参赛人数：0
+  </div>
+
+<script>
+const username = localStorage.getItem('username');
+if (!username) { alert("未检测到用户，请重新登录！"); window.location.href = "index.html"; }
+
+function refreshLeaderboard() {
+  fetch('/api/leaderboard')
+    .then(res => res.json())
+    .then(data => {
+      const board = document.getElementById('leaderboard');
+      board.innerHTML = '<h3>排行榜</h3>';
+      data.players.sort((a, b) => b.time - a.time).forEach((p, i) => {
+        board.innerHTML += `<div class="entry ${p.username === username ? 'highlight' : ''}" id="player-${p.username}">
+          <span>${i+1}. ${p.username}</span><span>${p.time}分钟 · x${p.invites}</span></div>`;
+      });
+    });
+}
+
+function refreshStatus() {
+  fetch('/api/status')
+    .then(res => res.json())
+    .then(data => {
+      document.getElementById('statusBar').innerText = `奖池：¥${data.pool} | 参赛人数：${data.players}`;
+    });
+}
+
+function watchAd() {
+  fetch('/api/watch', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ username }) })
+  .then(() => { refreshLeaderboard(); refreshStatus(); });
+}
+
+function inviteFriend() {
+  fetch('/api/invite', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ username }) })
+  .then(() => { refreshLeaderboard(); refreshStatus(); });
+}
+
+function exitGame() {
+  fetch('/api/exit', { method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({ username }) })
+  .then(res => res.json())
+  .then(data => {
+    alert(data.message);
+    window.location.href = 'start.html';
+  });
+}
+
+function searchPlayer() {
+  const name = document.getElementById('searchInput').value.trim();
+  const target = document.getElementById('player-' + name);
+  if (target) {
+    target.scrollIntoView({ behavior: 'instant', block: 'center' });
+  } else {
+    alert("未找到该玩家！");
+  }
+}
+
+// 初始化
+refreshLeaderboard();
+refreshStatus();
+setInterval(refreshLeaderboard, 30000);
+setInterval(refreshStatus, 30000);
+</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>比赛规则</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { background: #0b3c91; color: #fff; padding: 20px; font-family: Arial; }
+    .paper { background: #fff8dc; color: #333; padding: 20px; border-radius: 10px; }
+    button { margin-top: 20px; padding: 10px 20px; border: none; border-radius: 20px; background: orange; color: #fff; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="paper">
+    <h2>比赛规则</h2>
+    <p>1. 每位玩家支付 <b>1元</b> 进入比赛。</p>
+    <p>2. 点击观看广告，广告时间按邀请倍数增长。</p>
+    <p>3. 每邀请一次，<b>倍数×2</b>，无限叠加。</p>
+    <p>4. 比赛结束后，按广告累计时间分配奖金。</p>
+    <label><input type="checkbox" id="agree" onclick="checkAgree()"> 我已阅读并同意规则（仅限18岁以上）</label><br>
+    <button id="payBtn" disabled onclick="startGame()">同意并支付 ¥1 开始比赛</button>
+  </div>
+
+<script>
+function checkAgree() {
+  document.getElementById("payBtn").disabled = !document.getElementById("agree").checked;
+}
+function startGame() {
+  const username = localStorage.getItem('username');
+  fetch('/api/join', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ username })
+  }).then(() => {
+    window.location.href = "competition.html";
+  });
+}
+</script>
+</body>
+</html>
