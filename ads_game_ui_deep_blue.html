@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>广告争霸赛</title>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0b3c91, #1565c0);
+      color: #fff;
+      display:flex;
+      flex-direction:column;
+      min-height:100vh;
+    }
+
+    .header { text-align:center; padding:1rem; }
+    .header h1 { font-size:1.5rem; color:#fff; }
+    .header p { font-size:0.875rem; color:#e0e0e0; margin-top:0.25rem; }
+
+    .main { flex:1; padding:1rem; }
+
+    .card {
+      background:#ffffffee;
+      border-radius:8px;
+      box-shadow:0 2px 8px rgba(0,0,0,0.1);
+      padding:1rem;
+      margin-bottom:1rem;
+      color: #333;
+    }
+
+    .card h2 { font-size:1.125rem; margin-bottom:0.5rem; }
+    .card .line { display:flex; justify-content:space-between; margin:0.5rem 0; }
+    .card .label { color:#666; }
+    .card .value { font-weight:bold; }
+
+    .btn-start {
+      display:block;
+      width:100%;
+      text-align:center;
+      padding:1rem;
+      background:linear-gradient(45deg,#ff6b00,#ffa000);
+      color:#fff;
+      border:none;
+      border-radius:28px;
+      font-size:1.125rem;
+      font-weight:bold;
+      box-shadow:0 4px 12px rgba(0,0,0,0.15);
+      cursor:pointer;
+      margin:1rem 0;
+    }
+
+    .btn-start:active { transform:translateY(1px); }
+
+    .status-bar {
+      background:#ffffffdd;
+      color: #333;
+      border-top:1px solid #eee;
+      padding:0.75rem 1rem;
+      display:flex;
+      justify-content:space-between;
+      font-size:0.875rem;
+    }
+
+    .bottom-nav {
+      position:fixed;
+      bottom:0;
+      left:0;
+      right:0;
+      height:56px;
+      background:#ffffffee;
+      border-top:1px solid #ddd;
+      display:flex;
+      justify-content:space-around;
+      align-items:center;
+    }
+
+    .bottom-nav a {
+      text-decoration:none;
+      font-size:0.75rem;
+      color:#555;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+    }
+
+    .bottom-nav a.active { color:#ff6b00; }
+
+    .icon {
+      width:24px;
+      height:24px;
+      background:rgba(0,0,0,0.1);
+      border-radius:4px;
+      margin-bottom:0.25rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <h1>广告争霸赛</h1>
+    <p>看广告赢奖金，邀请好友加倍</p>
+  </header>
+
+  <main class="main">
+    <section class="card">
+      <h2>上一轮比赛结果</h2>
+      <div class="line"><span class="label">排名</span><span class="value">第 8 名</span></div>
+      <div class="line"><span class="label">奖金</span><span class="value">¥ 12.50</span></div>
+      <div class="line"><span class="label">广告时长</span><span class="value">17 分钟</span></div>
+      <div class="line"><span class="label">邀请加成</span><span class="value">× 2</span></div>
+    </section>
+
+    <button class="btn-start">开始游戏（¥ 1 参赛）</button>
+  </main>
+
+  <div class="status-bar">
+    <div>当前奖池：¥ 2567.00</div>
+    <div>比赛进行中，已有 3 281 人参赛</div>
+  </div>
+
+  <nav class="bottom-nav">
+    <a href="#" class="active"><div class="icon"></div>首页</a>
+    <a href="#"><div class="icon"></div>排行榜</a>
+    <a href="#"><div class="icon"></div>规则</a>
+    <a href="#"><div class="icon"></div>我的</a>
+  </nav>
+
+</body>
+</html>

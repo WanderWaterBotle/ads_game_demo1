@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>广告争霸赛 - 比赛中</title>
+  <style>
+    body {
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0b3c91, #1565c0);
+      color: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      padding: 1rem;
+    }
+    .header {
+      text-align: center;
+      padding: 1rem;
+    }
+    .header h1 {
+      font-size: 1.5rem;
+      color: #ffffff;
+    }
+
+    .search-bar {
+      margin: 1rem 0;
+      display: flex;
+    }
+    .search-bar input {
+      flex: 1;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      border: none;
+      outline: none;
+      font-size: 1rem;
+    }
+
+    .leaderboard {
+      background: #1e3c72;
+      border-radius: 12px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    .leaderboard h2 {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+    }
+    .entry {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      border-bottom: 1px solid #2a4c9e;
+      font-size: 0.95rem;
+    }
+    .entry:last-child {
+      border-bottom: none;
+    }
+
+    .actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .btn {
+      flex: 1;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 500;
+      color: #fff;
+      border: none;
+      border-radius: 28px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .btn-watch {
+      background: linear-gradient(45deg, #ff6b00, #ffa000);
+    }
+    .btn-invite {
+      background: linear-gradient(45deg, #00c853, #64dd17);
+    }
+    .btn:active {
+      transform: translateY(1px);
+    }
+
+    .status {
+      margin-top: 2rem;
+      text-align: center;
+      font-size: 0.9rem;
+      color: #ccc;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>广告争霸赛</h1>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="搜索用户名查看数据" />
+    </div>
+
+    <div class="leaderboard">
+      <h2>排行榜</h2>
+      <div class="entry">
+        <span>1. 用户A</span>
+        <span>45分钟 · 邀请x3</span>
+      </div>
+      <div class="entry">
+        <span>2. 用户B</span>
+        <span>42分钟 · 邀请x2</span>
+      </div>
+      <div class="entry">
+        <span>3. 用户C</span>
+        <span>39分钟 · 邀请x4</span>
+      </div>
+      <div class="entry">
+        <span>你</span>
+        <span>17分钟 · 邀请x2</span>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button class="btn btn-watch">观看广告</button>
+      <button class="btn btn-invite">邀请好友</button>
+    </div>
+
+    <div class="status">
+      当前奖池 ¥ 2,832.00 · 已有 3,382 人参赛
+    </div>
+  </div>
+</body>
+</html>
