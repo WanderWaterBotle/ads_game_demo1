@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>登录 - 广告争霸赛</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { display: flex; justify-content: center; align-items: center; height: 100vh; background: #0b3c91; color: #fff; font-family: Arial; }
+    .modal { background: #1e3c72; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px #000; text-align: center; }
+    input { display: block; margin: 10px auto; padding: 10px; width: 80%; border-radius: 5px; border: none; }
+    button { margin: 5px; padding: 10px 20px; border: none; border-radius: 20px; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <div class="modal">
+    <h2>登录 / 注册</h2>
+    <input type="text" id="username" placeholder="用户名">
+    <input type="password" id="password" placeholder="密码">
+    <button onclick="login()">登录</button>
+    <button onclick="register()">注册</button>
+    <p id="msg"></p>
+  </div>
+
+<script>
+function login() {
+  fetch('/api/login', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    if(data.success){
+      localStorage.setItem('username', document.getElementById('username').value);
+      window.location.href = 'start.html';
+    } else {
+      document.getElementById('msg').innerText = data.message;
+    }
+  });
+}
+
+function register() {
+  fetch('/api/register', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      username: document.getElementById('username').value,
+      password: document.getElementById('password').value
+    })
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('msg').innerText = data.message;
+  });
+}
+</script>
+</body>
+</html>
